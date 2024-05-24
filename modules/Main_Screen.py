@@ -127,7 +127,7 @@ def Interface_Load_Game(screen, cfg, Username, Password):
     running = True
 
     while running:
-        screen.fill((192, 192, 192))
+        screen.fill((29, 89, 98))
         BackGround = Background('resources/images/tamvagiahuy.png', [0, 0])
         screen.blit(BackGround.image, BackGround.rect)
         main_menu_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2, cfg.SCREENSIZE[1]//3), 'MAIN MENU', font)
@@ -213,15 +213,15 @@ def Interface_Game_Play(screen, cfg, font, clock, maze_now, maze_solver, hero_no
         maze_now.draw(screen)
         estimated_steps = len(solution)
         # ---Show some info
-        showText(screen, font, 'LEVELDONE: %d' % num_levels, (255, 0, 0), (10, 10))
-        showText(screen, font, 'BESTSCORE: %s' % best_scores, (255, 0, 0), (210, 10))
-        showText(screen, font, 'USEDSTEPS: %s' % num_steps, (255, 0, 0), (410, 10))
-        showText(screen, font, 'ESTIMATED STEPS: %s' % estimated_steps, (255, 0, 0), (610, 10))
+        showText(screen, font, 'LEVEL DONE: %d' % num_levels, (242, 197, 40), (10, 10))
+        showText(screen, font, 'BEST SCORE: %s' % best_scores, (242, 197, 40), (210, 10))
+        showText(screen, font, 'USED STEPS: %s' % num_steps, (242, 197, 40), (410, 10))
+        showText(screen, font, 'ESTIMATED STEPS: %s' % estimated_steps, (242, 197, 40), (610, 10))
         # End the timer and calculate elapsed time
         end_time = time.time()
         elapsed_time = end_time - start_time
         minutes, seconds = divmod(elapsed_time, 60)
-        showText(screen, font, 'TIME: %d:%02d' % (minutes, seconds), (255, 0, 0), (810, 10))
+        showText(screen, font, 'TIME: %d:%02d' % (minutes, seconds), (242, 197, 40), (810, 10))
         #Content box
         Playing_Mode = ['Manual', 'Auto']
         Pathfinding_Algorithm = ['A*', 'BFS']
