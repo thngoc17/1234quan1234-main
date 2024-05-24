@@ -9,11 +9,13 @@ def UserInterface(screen, cfg, mode):
     font = pygame.font.SysFont('Consolas', 30)
     font_small = pygame.font.SysFont('Consolas', 20)
     clock = pygame.time.Clock()
-    valid_users = load_users('users_data.pkl')
+    valid_users = load_users('Data_Users.pkl')
 
     if mode == 'interface':
         while True:
             screen.fill((192, 192, 192))
+            BackGround = Background('resources/images/tamvagiahuy.png', [0, 0])
+            screen.blit(BackGround.image, BackGround.rect)
             login_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2, cfg.SCREENSIZE[1]//3), 'LOGIN', font)
             register_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2, cfg.SCREENSIZE[1]//2), 'REGISTER', font)
             exit_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2, (cfg.SCREENSIZE[1]//2+(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3))), 'EXIT', font)
@@ -40,6 +42,8 @@ def UserInterface(screen, cfg, mode):
         password_box = TextBox(screen, ((cfg.SCREENSIZE[0]-200)//2, cfg.SCREENSIZE[1]//2), (200, 50))
         while True:
             screen.fill((192, 192, 192))
+            BackGround = Background('resources/images/tamvagiahuy.png', [0, 0])
+            screen.blit(BackGround.image, BackGround.rect)
             login_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2,(cfg.SCREENSIZE[1]//2)+(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3)), 'LOGIN', font)
             return_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2, (cfg.SCREENSIZE[1]//2)+2*(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3)), 'RETURN', font)
             expanded_login_button = login_button.inflate(130, 130)  
@@ -81,7 +85,7 @@ def UserInterface(screen, cfg, mode):
         while True:
             screen.fill((192, 192, 192))
             register_button = Button(screen, ((cfg.SCREENSIZE[0]-200)//2, (cfg.SCREENSIZE[1]//2)+2*(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3)), 'REGISTER', font)
-            return_button = Button(screen, ((cfg.SCREENSIZE[0]-00)//2, (cfg.SCREENSIZE[1]//2)+3*(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3)), 'RETURN', font)
+            return_button = Button(screen, ((cfg.SCREENSIZE[0]-700)//2, (cfg.SCREENSIZE[1]//2)+2*(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3)), 'RETURN', font)
             expanded_register_button = register_button.inflate(130, 130)
             expanded_return_button = return_button.inflate(130, 130)
             for event in pygame.event.get():
@@ -96,7 +100,7 @@ def UserInterface(screen, cfg, mode):
                         if not entered_username or not entered_password or not confirm_password:
                             showText(screen, font, 'Username, password or confirm password cannot be empty', (255, 0, 0), (cfg.SCREENSIZE[0]//2-100, cfg.SCREENSIZE[1]//2+100))
                         elif entered_username not in valid_users and entered_password == confirm_password:
-                            save_users(entered_username, entered_password, 'users_data.pkl')
+                            save_users(entered_username, entered_password, 'Data_Users.pkl')
                             return True, entered_username, entered_password
                         else:
                             showText(screen, font, 'Passwords do not match or Username already exists', (255, 0, 0), (cfg.SCREENSIZE[0]//2-100, cfg.SCREENSIZE[1]//2+100))
@@ -120,13 +124,5 @@ def UserInterface(screen, cfg, mode):
                 showText(screen, font_small, 'Confirm password', (128, 128, 128), ((cfg.SCREENSIZE[0]-200)//2, (cfg.SCREENSIZE[1]//2)+(cfg.SCREENSIZE[1]//2-cfg.SCREENSIZE[1]//3)+15))
             pygame.display.update()
             clock.tick(cfg.FPS)
-def validate_credentials(username, password, confirm_password=None):
-    valid_users = load_users('users_data.pkl')
-    if username in valid_users:
-        if confirm_password is None:  # For Login
-            return valid_users[username]['password'] == password
-        else:  # For Register
-            return password == confirm_password
-    else:
-        return False
+
         

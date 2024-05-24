@@ -1,7 +1,6 @@
 import pygame
 
 
-
 class Hero(pygame.sprite.Sprite):
 	def __init__(self, imagepath, coordinate, block_size, border_size, **kwargs):
 		pygame.sprite.Sprite.__init__(self)
